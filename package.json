@@ -1,0 +1,16 @@
+{
+  "name": "ascii-art-video-player",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "网页 ASCII 字符画视频播放器：视频解码 → 缩放采样 → 亮度映射 → 字符刷新",
+  "scripts": {
+    "start": "node serve.mjs",
+    "test": "node --test tests/unit.test.mjs",
+    "test:e2e": "node tests/e2e.mjs",
+    "fixtures": "node tools/make-fixtures.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ASCII ART VIDEO PLAYER — 网页字符画播放器</title>
+<link rel="stylesheet" href="src/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>@</text></svg>">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">▚</span>
+    <span>ASCII ART VIDEO PLAYER</span>
+    <span class="ver">v1.0</span>
+    <span class="tag">解码 → 缩放采样 → 亮度映射 → 双缓冲刷新</span>
+  </div>
+  <div class="spacer"></div>
+  <div class="top-actions">
+    <button class="btn primary" id="btn-open">📂 选择视频</button>
+    <button class="btn" id="btn-demo">✨ 内置演示</button>
+    <button class="btn icon" id="btn-help" title="快捷键">?</button>
+  </div>
+</header>
+
+<div class="layout">
+  <section class="stage-wrap">
+    <div class="banner" id="banner"></div>
+
+    <div class="stage" id="stage">
+      <canvas id="canvas"></canvas>
+      <pre id="textlayer" hidden></pre>
+
+      <div class="dropzone" id="dropzone">
+        <div class="art">   .:-=+*#%@
+  .:-=+*#%@@@
+ .:-=+*#%@@@@@
+:-=+*#%@@@@@@@
+ :=+*#%@@@@@
+   =*#%@@@
+    #%@@
+     @</div>
+        <strong>把视频拖到这里</strong>
+        <div class="hint">
+          或点击左上角「选择视频」。支持浏览器可解码的容器（mp4 / webm / mov / mkv 等）。<br>
+          解码、缩放、字符映射、刷新全部在你的浏览器本地完成，视频不会上传到任何服务器。
+        </div>
+      </div>
+
+      <div class="hud" id="hud" hidden title="按 H 显示 / 隐藏"></div>
+      <div class="toast" id="toast"></div>
+    </div>
+
+    <div class="transport">
+      <button class="btn icon" id="btn-play" title="播放 / 暂停 (空格)">▶</button>
+      <button class="btn icon" id="btn-back" title="后退 5 秒 (←)">⏪</button>
+      <button class="btn icon" id="btn-fwd" title="前进 5 秒 (→)">⏩</button>
+      <button class="btn icon" id="btn-frame-back" title="上一帧 (Shift+←)">◀|</button>
+      <button class="btn icon" id="btn-frame-fwd" title="下一帧 (Shift+→)">|▶</button>
+      <input type="range" id="seek" min="0" max="1000" value="0" step="1" title="进度">
+      <span class="time" id="time">00:00.00 / 00:00.00</span>
+      <button class="btn icon" id="btn-mute" title="静音 (M)">🔊</button>
+      <input type="range" id="volume" min="0" max="1" step="0.01" value="0.8" title="音量">
+      <select id="rate" title="播放速度">
+        <option value="0.25">0.25×</option>
+        <option value="0.5">0.5×</option>
+        <option value="1" selected>1×</option>
+        <option value="1.5">1.5×</option>
+        <option value="2">2×</option>
+      </select>
+      <button class="btn icon" id="btn-shot" title="截图 PNG (S)">📷</button>
+      <button class="btn icon" id="btn-fs" title="全屏 (F)">⛶</button>
+    </div>
+  </section>
+
+  <aside class="panel">
+    <details class="group" open>
+      <summary>网格与比例</summary>
+      <div class="group-body">
+        <div class="presets">
+          <button class="btn mini" data-cols="80" data-rows="40">80 × 40</button>
+          <button class="btn mini" data-cols="120" data-rows="40">120 × 40</button>
+          <button class="btn mini" data-cols="160" data-rows="48">160 × 48</button>
+          <button class="btn mini" data-cols="200" data-rows="60">200 × 60</button>
+          <button class="btn mini" data-cols="240" data-rows="72">240 × 72</button>
+        </div>
+        <div class="field">
+          <label for="cols">列数</label>
+          <input type="range" id="cols" min="20" max="400" step="1" value="120">
+          <span class="val" id="cols-val">120</span>
+        </div>
+        <div class="field">
+          <label for="rows">行数</label>
+          <input type="range" id="rows" min="10" max="200" step="1" value="40">
+          <span class="val" id="rows-val">40</span>
+        </div>
+        <div class="checks">
+          <label class="check"><input type="checkbox" id="autoRows" checked>
+            <span>行数按容器比例自动计算</span></label>
+        </div>
+        <div class="field">
+          <label for="charAspect">字符宽高比</label>
+          <input type="range" id="charAspect" min="0.35" max="0.95" step="0.005" value="0.6">
+          <span class="val" id="charAspect-val">0.600</span>
+        </div>
+        <p class="note">
+          等宽字符不是正方形（宽 ≈ 0.6 × 高），所以 <b>rows = cols × 容器高/宽 × 字符比</b>，
+          这样才能保证画面不被纵向拉伸。16:9 下 120 列 ≈ 40 行。
+        </p>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary>字符与亮度映射</summary>
+      <div class="group-body">
+        <div class="field">
+          <label for="charset">字符集</label>
+          <select id="charset"></select>
+        </div>
+        <div class="field">
+          <label for="customCharset">自定义</label>
+          <input type="text" id="customCharset" placeholder="留空则用上面的字符集，例如 .:-=+*#%@">
+        </div>
+        <div class="ramp-preview" id="ramp-preview"></div>
+        <div class="checks">
+          <label class="check"><input type="checkbox" id="invert">
+            <span>反相（暗处用重字符）</span></label>
+        </div>
+        <div class="field">
+          <label for="brightness">亮度</label>
+          <input type="range" id="brightness" min="-1" max="1" step="0.01" value="0">
+          <span class="val" id="brightness-val">0.00</span>
+        </div>
+        <div class="field">
+          <label for="contrast">对比度</label>
+          <input type="range" id="contrast" min="0" max="2.5" step="0.01" value="1">
+          <span class="val" id="contrast-val">1.00</span>
+        </div>
+        <div class="field">
+          <label for="gamma">伽马</label>
+          <input type="range" id="gamma" min="0.2" max="3" step="0.01" value="1">
+          <span class="val" id="gamma-val">1.00</span>
+        </div>
+        <div class="field">
+          <label for="colorMode">颜色</label>
+          <select id="colorMode">
+            <option value="color" selected>24 位真彩色</option>
+            <option value="gray">灰度</option>
+            <option value="mono">单色（终端绿）</option>
+          </select>
+        </div>
+      </div>
+    </details>
+
+    <details class="group">
+      <summary>采样与适配</summary>
+      <div class="group-body">
+        <div class="field">
+          <label for="fit">缩放方式</label>
+          <select id="fit">
+            <option value="contain" selected>完整显示（留黑边）</option>
+            <option value="cover">裁剪填满</option>
+            <option value="stretch">拉伸填满</option>
+          </select>
+        </div>
+        <div class="checks">
+          <label class="check"><input type="checkbox" id="highQuality" checked>
+            <span>高质量降采样（大比例缩小时多一级）</span></label>
+        </div>
+        <p class="note">
+          <b>Y = 0.299R + 0.587G + 0.114B</b> 得到亮度后，按字符集从暗到亮取字形；
+          颜色取自同一像素，所以暗块是空格、亮块是 <b>@</b> 并带上原始色相。
+        </p>
+      </div>
+    </details>
+
+    <details class="group">
+      <summary>刷新与性能</summary>
+      <div class="group-body">
+        <div class="field">
+          <label for="engine">渲染后端</label>
+          <select id="engine">
+            <option value="layered" selected>分层合成（快）</option>
+            <option value="direct">逐格直绘（基线）</option>
+            <option value="dom">DOM 文本（可复制）</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="targetFps">目标帧率</label>
+          <select id="targetFps">
+            <option value="10">10 fps</option>
+            <option value="15">15 fps</option>
+            <option value="24">24 fps</option>
+            <option value="30" selected>30 fps</option>
+            <option value="60">60 fps</option>
+            <option value="0">不限制</option>
+          </select>
+        </div>
+        <div class="checks">
+          <label class="check"><input type="checkbox" id="autoPerf" checked>
+            <span>掉帧时自动降低列数</span></label>
+          <label class="check"><input type="checkbox" id="showHud" checked>
+            <span>显示 HUD 状态</span></label>
+        </div>
+      </div>
+    </details>
+
+    <details class="group">
+      <summary>输入源</summary>
+      <div class="group-body">
+        <div class="field">
+          <label for="url-input">视频网址</label>
+          <input type="url" id="url-input" placeholder="https://…/video.mp4">
+        </div>
+        <div class="presets">
+          <button class="btn mini" id="btn-url-load">载入网址</button>
+          <button class="btn mini" id="btn-open-2">选择本地文件</button>
+        </div>
+        <p class="note" id="src-info">当前来源：内置演示图案</p>
+      </div>
+    </details>
+
+    <details class="group">
+      <summary>导出</summary>
+      <div class="group-body">
+        <div class="presets">
+          <button class="btn mini" id="btn-shot-2">截图 PNG</button>
+          <button class="btn mini" id="btn-copy">复制字符帧</button>
+          <button class="btn mini" id="btn-copy-ansi">复制 ANSI 真彩色</button>
+          <button class="btn mini" id="btn-download">下载 .txt</button>
+        </div>
+        <p class="note">复制的 ANSI 文本可直接粘贴到支持 24 位真彩色的终端里。</p>
+      </div>
+    </details>
+
+    <details class="group">
+      <summary>快捷键</summary>
+      <div class="group-body">
+        <div class="kbd-list">
+          <span class="kbd">空格</span><span>播放 / 暂停</span>
+          <span class="kbd">← →</span><span>后退 / 前进 5 秒</span>
+          <span class="kbd">Shift + ← →</span><span>单帧步进</span>
+          <span class="kbd">↑ ↓</span><span>音量</span>
+          <span class="kbd">M</span><span>静音</span>
+          <span class="kbd">F</span><span>全屏</span>
+          <span class="kbd">H</span><span>显示 / 隐藏左上角状态栏</span>
+          <span class="kbd">S</span><span>截图</span>
+          <span class="kbd">C</span><span>复制字符帧</span>
+          <span class="kbd">D</span><span>内置演示</span>
+          <span class="kbd">1 – 5</span><span>切换网格预设</span>
+        </div>
+      </div>
+    </details>
+  </aside>
+</div>
+
+<video id="video" hidden playsinline crossorigin="anonymous"></video>
+<input type="file" id="file" accept="video/*" hidden>
+
+<dialog id="help">
+  <div class="dlg-body">
+    <h3>这个页面做了什么</h3>
+    <p class="note">
+      浏览器媒体栈负责解码（HTMLVideoElement），每帧被画进一个 cols × rows 的采样画布，
+      逐像素按 BT.601 公式算亮度并映射成字符，再按目标帧率刷新到画布上。音频由同一个媒体元素播放，
+      与视频帧是同一时钟，所以天然同步。
+    </p>
+    <div class="presets" style="margin-top:12px">
+      <button class="btn mini" id="btn-close-help">知道了</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  // 经典脚本（非 module）：即使 ES 模块被 file:// 策略拦截也一定能跑到
+  (function () {
+    var banner = document.getElementById('banner');
+    function warn(html) { banner.innerHTML = html; banner.classList.add('show'); }
+    if (location.protocol === 'file:') {
+      warn('⚠️ 当前用 <code>file://</code> 打开，浏览器会拦截 ES 模块与画布像素读取。' +
+           '请双击 <code>start.cmd</code>（或执行 <code>node serve.mjs</code>），再访问 ' +
+           '<code>http://localhost:8080</code>。');
+    }
+    setTimeout(function () {
+      if (!window.__ASCII__) {
+        warn('⚠️ 应用脚本未加载。请通过本地服务器访问：双击 <code>start.cmd</code>，' +
+             '或执行 <code>node serve.mjs</code> 后打开 <code>http://localhost:8080</code>。');
+      }
+    }, 2500);
+  })();
+</script>
+<script type="module" src="src/app.js"></script>
+</body>
+</html>

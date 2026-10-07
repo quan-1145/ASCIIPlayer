@@ -1,0 +1,582 @@
+{
+  "startedAt": "2026-10-07T03:37:26.632Z",
+  "pageErrors": [],
+  "results": [
+    {
+      "name": "应用已就绪并暴露测试 API",
+      "ok": true,
+      "detail": "来源=synthetic"
+    },
+    {
+      "name": "默认渲染后端 = 分层合成",
+      "ok": true,
+      "detail": "engine=layered"
+    },
+    {
+      "name": "默认 120 列",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "等宽字符步进比在 0.45–0.75 之间",
+      "ok": true,
+      "detail": "measured=0.5859"
+    },
+    {
+      "name": "单元格宽高比 ≈ 字符宽高比（纵向校正生效）",
+      "ok": true,
+      "detail": "cellW/cellH=0.5812, charAspect=0.586"
+    },
+    {
+      "name": "画布按设备像素比放大",
+      "ok": true,
+      "detail": "dpr=1, canvas=1216×680"
+    },
+    {
+      "name": "每行字符数 = 列数",
+      "ok": true,
+      "detail": "120 vs 120"
+    },
+    {
+      "name": "行数 = 网格行数",
+      "ok": true,
+      "detail": "39 vs 39"
+    },
+    {
+      "name": "画面使用了多种字形",
+      "ok": true,
+      "detail": "distinct=10"
+    },
+    {
+      "name": "灰阶条（底行）字符索引单调不减",
+      "ok": true,
+      "detail": "首=0 尾=9 回退次数=0"
+    },
+    {
+      "name": "视频像素可读（画布未被污染）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "黑色区域 → 空格/极暗字符",
+      "ok": true,
+      "detail": "index=0, color=#0"
+    },
+    {
+      "name": "中灰区域 → 字符集中间",
+      "ok": true,
+      "detail": "index=5 → \"+\""
+    },
+    {
+      "name": "白色区域 → 最亮字符 @",
+      "ok": true,
+      "detail": "index=9 → \"@\""
+    },
+    {
+      "name": "左暗右明的真彩色保留",
+      "ok": true,
+      "detail": "left=#0 right=#ffffff"
+    },
+    {
+      "name": "渐变从左到右单调变亮",
+      "ok": true,
+      "detail": "首=0 尾=9 回退=0"
+    },
+    {
+      "name": "contain：视频在“显示空间”里保持原始比例",
+      "ok": true,
+      "detail": "显示比例 1.778 vs 视频 1.778（容器 1.010）"
+    },
+    {
+      "name": "contain：比例不符时上下留黑边",
+      "ok": true,
+      "detail": "y=8.64 行, h=22.71 行"
+    },
+    {
+      "name": "cover：裁切填满且仍保持比例",
+      "ok": true,
+      "detail": "w=211.3 h=40.0 比例=1.778"
+    },
+    {
+      "name": "stretch：铺满整个网格",
+      "ok": true,
+      "detail": "{\"x\":0,\"y\":0,\"w\":120,\"h\":40,\"displayAspect\":1.009549795361528,\"canvasAspect\":1.009549795361528}"
+    },
+    {
+      "name": "t=0.5s 渲染出字符网格",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "t=0.5s 字形种类 ≥ 6",
+      "ok": true,
+      "detail": "distinct=10"
+    },
+    {
+      "name": "t=0.5s 暗部占比合理（Bad Apple 为白剪影黑底）",
+      "ok": true,
+      "detail": "空格 81.5% · 平均字符索引 1.17"
+    },
+    {
+      "name": "t=2s 渲染出字符网格",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "t=2s 字形种类 ≥ 6",
+      "ok": true,
+      "detail": "distinct=10"
+    },
+    {
+      "name": "t=2s 暗部占比合理（Bad Apple 为白剪影黑底）",
+      "ok": true,
+      "detail": "空格 72.6% · 平均字符索引 1.87"
+    },
+    {
+      "name": "t=4s 渲染出字符网格",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "t=4s 字形种类 ≥ 6",
+      "ok": true,
+      "detail": "distinct=10"
+    },
+    {
+      "name": "t=4s 暗部占比合理（Bad Apple 为白剪影黑底）",
+      "ok": true,
+      "detail": "空格 73.3% · 平均字符索引 2.21"
+    },
+    {
+      "name": "t=5.5s 渲染出字符网格",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "t=5.5s 字形种类 ≥ 6",
+      "ok": true,
+      "detail": "distinct=10"
+    },
+    {
+      "name": "t=5.5s 暗部占比合理（Bad Apple 为白剪影黑底）",
+      "ok": true,
+      "detail": "空格 71.8% · 平均字符索引 2.33"
+    },
+    {
+      "name": "120×40 端到端 < 33.3ms/帧（30fps 预算）",
+      "ok": true,
+      "detail": "2.97ms/帧（逐格直绘 3.27ms）"
+    },
+    {
+      "name": "200×60 端到端 < 33.3ms/帧（30fps 预算）",
+      "ok": true,
+      "detail": "6.81ms/帧（逐格直绘 7.27ms）"
+    },
+    {
+      "name": "240×72 端到端 < 33.3ms/帧（30fps 预算）",
+      "ok": true,
+      "detail": "10.13ms/帧（逐格直绘 10.22ms）"
+    },
+    {
+      "name": "分层合成的绘制开销低于逐格直绘",
+      "ok": true,
+      "detail": "120×40: 1.47ms vs 2.21ms · 240×72: 4.98ms vs 8.28ms · DOM: 0.03ms"
+    },
+    {
+      "name": "耗时分解（真实视频，120×40）",
+      "ok": true,
+      "detail": "采样 1.61ms + 读回 2.43ms + 亮度映射 0.03ms + 绘制 2.25ms"
+    },
+    {
+      "name": "30fps 目标下实际刷新 ≥ 22fps",
+      "ok": true,
+      "detail": "实测 30.0 fps（90 帧 / 3.00s，丢帧 160）"
+    },
+    {
+      "name": "播放推进了媒体时间（1× 速率，无漂移）",
+      "ok": true,
+      "detail": "currentTime=3.13s，期望 ≈ 3.20s（时长 6.00s）"
+    },
+    {
+      "name": "音频轨已解码（与视频帧共用媒体时钟，因此天然同步）",
+      "ok": true,
+      "detail": "已解码音频 107650 字节"
+    },
+    {
+      "name": "分层合成与逐格直绘得到完全相同的字符矩阵",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "DOM 文本后端输出等长字符画",
+      "ok": true,
+      "detail": "textContent=4839 字符，canvas hidden=true"
+    },
+    {
+      "name": "灰度模式 r=g=b",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "单色模式全部为终端绿",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "真彩色模式保留了多色信息",
+      "ok": true,
+      "detail": "不同颜色数=247"
+    },
+    {
+      "name": "反相：字符集倒序、亮度索引不变",
+      "ok": true,
+      "detail": "\" .:-=+*#%@\" → \"@%#*+=-:. \"，索引不一致 0 处"
+    },
+    {
+      "name": "反相：同一像素取到对称字形（亮暗互换）",
+      "ok": true,
+      "detail": "样例              / @@@@@@@@@@@@"
+    },
+    {
+      "name": "字符集切换到方块字符生效",
+      "ok": true,
+      "detail": "样例=\"            \""
+    },
+    {
+      "name": "自定义字符集生效",
+      "ok": true,
+      "detail": "ramp=\" .oO@\""
+    },
+    {
+      "name": "画布随窗口缩小",
+      "ok": true,
+      "detail": "1216 → 976"
+    },
+    {
+      "name": "自动行数随容器比例重算",
+      "ok": true,
+      "detail": "39 行 → 26 行"
+    },
+    {
+      "name": "缩小后仍保持字符宽高比校正",
+      "ok": true,
+      "detail": "cellW/cellH=0.581"
+    },
+    {
+      "name": "240×72（17280 单元）仍能渲染",
+      "ok": true,
+      "detail": "17280 个字符单元"
+    },
+    {
+      "name": "240×72 渲染耗时（参考）",
+      "ok": true,
+      "detail": "9.84ms/帧 ≈ 102 fps 上限"
+    },
+    {
+      "name": "ANSI 导出含 24 位真彩色转义",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "ANSI 行数与网格一致",
+      "ok": true,
+      "detail": "39 vs 39"
+    },
+    {
+      "name": "画布可导出 PNG",
+      "ok": true,
+      "detail": "dataURL 263 KB"
+    },
+    {
+      "name": "找到文件输入控件",
+      "ok": true,
+      "detail": "nodeId=10"
+    },
+    {
+      "name": "选择本地文件后能正常载入",
+      "ok": true,
+      "detail": "640×360"
+    },
+    {
+      "name": "blob URL 没有被提前回收（ERR_FILE_NOT_FOUND 的根因）",
+      "ok": true,
+      "detail": "src=blob:… readyState=4"
+    },
+    {
+      "name": "上传失败时不应弹出错误横幅",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "本地文件像素可读、字符画正常",
+      "ok": true,
+      "detail": "字形 10 种 · 画布污染=false · 网格一致=true"
+    },
+    {
+      "name": "上传工作区里的 4K 源文件（123.6MB）也能载入",
+      "ok": true,
+      "detail": "3840×2160 · 232.2s"
+    },
+    {
+      "name": "4K 本地文件同样像素可读、渲染正常",
+      "ok": true,
+      "detail": "字形 10 种 · 暗部 80.8% · 网格一致=true"
+    },
+    {
+      "name": "切回内置演示后释放 blob URL（不泄漏）",
+      "ok": true,
+      "detail": "objectUrl=null"
+    },
+    {
+      "name": "时间显示会随播放更新（不是一直 00:00.00）",
+      "ok": true,
+      "detail": "00:01.00 / 00:06.00 → 00:02.56 / 00:06.00"
+    },
+    {
+      "name": "时间显示与实际播放位置一致",
+      "ok": true,
+      "detail": "显示 2.56s，实际 currentTime 2.76s"
+    },
+    {
+      "name": "时间显示带上了总时长",
+      "ok": true,
+      "detail": "\"00:02.56 / 00:06.00\"（时长 6.00s）"
+    },
+    {
+      "name": "进度条随播放前进",
+      "ok": true,
+      "detail": "167 → 426"
+    },
+    {
+      "name": "倍速下拉框是深色主题（不是白底黑字）",
+      "ok": true,
+      "detail": "background=rgb(10, 15, 20) color=rgb(215, 226, 234)"
+    },
+    {
+      "name": "2× 倍速真的生效（1 秒推进约 2 秒）",
+      "ok": true,
+      "detail": "playbackRate=2，1s 推进 1.86s"
+    },
+    {
+      "name": "内置演示图案也支持倍速与时间显示",
+      "ok": true,
+      "detail": "1s 推进 2.01s · 时间栏 \"00:01.88 / 00:12.00\""
+    },
+    {
+      "name": "审计了 37 个可见控件",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "没有控件的对比度低于 3.0",
+      "ok": true,
+      "detail": "summary() ratio=13.17 bg=#121820 · summary() ratio=13.17 bg=#121820 · summary() ratio=13.17 bg=#121820 · summary() ratio=13.17 bg=#121820"
+    },
+    {
+      "name": "没有控件退回浏览器默认白底",
+      "ok": true,
+      "detail": "全部为深色"
+    },
+    {
+      "name": "空格：播放 / 暂停",
+      "ok": true,
+      "detail": "播放=true 暂停=true"
+    },
+    {
+      "name": "→ / ← 快进快退 5 秒",
+      "ok": true,
+      "detail": "→ 到 5.20s，← 回到 0.20s"
+    },
+    {
+      "name": "M 静音开关",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "数字键切换网格预设（3 → 160×48）",
+      "ok": true,
+      "detail": "实际 160x48"
+    },
+    {
+      "name": "D 切到内置演示",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "拖到画面上会高亮投放区",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "拖放后成功载入并播放该文件",
+      "ok": true,
+      "detail": "480×270 · blob:…"
+    },
+    {
+      "name": "拖放载入后投放区取消高亮且像素可读",
+      "ok": true,
+      "detail": "暗部索引 0 < 亮部索引 9"
+    },
+    {
+      "name": "帮助对话框能打开与关闭",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "音量滑块生效且图标同步",
+      "ok": true,
+      "detail": "volume=0.3 图标=🔊"
+    },
+    {
+      "name": "静音按钮生效",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "拖动进度条时滑块不被 timeupdate 抢回",
+      "ok": true,
+      "detail": "拖动中保持 100（松开后跟随到 499）"
+    },
+    {
+      "name": "播放到结尾后按钮回到 ▶",
+      "ok": true,
+      "detail": "ended=true 图标=▶ 时间栏=\"00:02.00 / 00:02.00\""
+    },
+    {
+      "name": "默认显示状态栏",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "状态栏内容与当前网格一致（基准 120×40）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "取消「显示 HUD 状态」可隐藏（display:none 生效）",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "隐藏期间内容不再更新",
+      "ok": true,
+      "detail": "旧值 120×40=true，新值 160×48=false"
+    },
+    {
+      "name": "H 键可恢复显示并同步勾选框",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "暂停状态下重新显示时内容立即刷新（不是旧值）",
+      "ok": true,
+      "detail": "恢复后 HUD 已跟上 160×48"
+    },
+    {
+      "name": "H 键再次隐藏",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "file:// 下给出明确提示横幅",
+      "ok": true,
+      "detail": "banner=\"⚠️ 应用脚本未加载。请通过本地服务器访问：双击 start.cmd，或执行 node serve.mjs 后打开 http://localhost:8080。\" appLoaded=false"
+    },
+    {
+      "name": "file:// 说明",
+      "ok": true,
+      "detail": "ES 模块被拦截，提示横幅正确显示"
+    },
+    {
+      "name": "页面无未捕获异常 / console.error",
+      "ok": true,
+      "detail": "无"
+    }
+  ],
+  "passed": 98,
+  "failed": 0,
+  "performance": {
+    "layered120x40": 2.9733333334326746,
+    "direct120x40": 3.275,
+    "layered200x60": 6.8133333332008785,
+    "direct200x60": 7.267999999523163,
+    "layered240x72": 10.12666666706403,
+    "direct240x72": 10.220000000298024,
+    "drawOnly": {
+      "layered120x40": 1.4741666667163371,
+      "direct120x40": 2.205000000074506,
+      "dom120x40": 0.034999999776482583,
+      "layered240x72": 4.978749999776483,
+      "direct240x72": 8.283333333333333
+    },
+    "breakdown": {
+      "fps": 0,
+      "renderMs": 3.5999999940395355,
+      "renderEma": 6.323439997435854,
+      "tSource": 1.6083860102528094,
+      "tRead": 2.431560384915284,
+      "tMap": 0.03190253815006565,
+      "tDraw": 2.251591064117695,
+      "frames": 266,
+      "skipped": 23,
+      "vfc": 6,
+      "rafs": 197,
+      "loopStarts": 5,
+      "playEvents": 0,
+      "lastFrameAt": 6277.199999988079,
+      "fpsEma": 0,
+      "cols": 120,
+      "rows": 40,
+      "cellW": 10.133333333333333,
+      "cellH": 17,
+      "canvasW": 1216,
+      "canvasH": 680,
+      "dpr": 1,
+      "engine": "layered",
+      "tainted": false,
+      "ramp": " .:-=+*#%@",
+      "sourceKind": "video",
+      "pausedNow": true,
+      "running": true
+    }
+  },
+  "playbackFps": 29.99200213264545,
+  "clipStats": [
+    {
+      "t": 0.5,
+      "cols": 120,
+      "rows": 40,
+      "distinct": 10,
+      "spaceRatio": 0.8152083333333333,
+      "meanIndex": 1.1720833333333334,
+      "frames": 3
+    },
+    {
+      "t": 2,
+      "cols": 120,
+      "rows": 40,
+      "distinct": 10,
+      "spaceRatio": 0.7258333333333333,
+      "meanIndex": 1.8708333333333333,
+      "frames": 6
+    },
+    {
+      "t": 4,
+      "cols": 120,
+      "rows": 40,
+      "distinct": 10,
+      "spaceRatio": 0.733125,
+      "meanIndex": 2.2064583333333334,
+      "frames": 9
+    },
+    {
+      "t": 5.5,
+      "cols": 120,
+      "rows": 40,
+      "distinct": 10,
+      "spaceRatio": 0.718125,
+      "meanIndex": 2.3264583333333335,
+      "frames": 12
+    }
+  ]
+}
